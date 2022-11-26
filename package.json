@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production"
   },
   "author": "Slobozhancky <https://github.com/Slobozhancky>",
   "license": "ISC",
@@ -13,6 +15,8 @@
     "webpack-cli": "^5.0.0"
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.0"
+    "css-loader": "^6.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1"
   }
 }
