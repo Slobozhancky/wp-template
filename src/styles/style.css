@@ -7,3 +7,11 @@
 h1 {
     color: orangered;
 }
+
+.logo {
+    background: url('../assets/images/wp-logo.png');
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
