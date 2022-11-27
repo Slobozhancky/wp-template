@@ -4,6 +4,11 @@ const path = require("path");
 module.exports = {
     context: path.resolve(__dirname, "src"),
     mode: "development",
+    resolve: {
+        alias: {
+            images: path.resolve(__dirname, "src/assets/images"),
+        },
+    },
     entry: {
         main: "./index.js",
         analytics: "./analytics.js",

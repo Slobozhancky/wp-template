@@ -21,7 +21,7 @@ h1 {
 }
 
 .logo {
-    background: url('../assets/images/wp-logo.png');
+    background: url('images/wp-logo.png');
     background-size: cover;
     width: 200px;
     height: 200px;
