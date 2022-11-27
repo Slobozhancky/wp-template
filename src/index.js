@@ -7,6 +7,7 @@ import Img from "./assets/images/img.jpg";
 const body = document.querySelector("body");
 const btn = document.createElement("button");
 let counterTitle = document.querySelector(".counter_title");
+const divLogo = document.querySelector('.logo');
 
 let count = 0;
 function getRes() {
@@ -19,11 +20,11 @@ btn.innerHTML = "Click me";
 
 btn.addEventListener("click", () => getRes());
 
-body.appendChild(btn);
+divLogo.after(btn);
 
 const img = new Image();
 img.src = Img;
 
-body.appendChild(img);
+divLogo.after(img);
 
 console.log(img);
