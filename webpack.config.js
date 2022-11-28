@@ -1,7 +1,26 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+
+const devMode = process.env.NODE_ENV !== "production";
+
+const optimization = () => {
+    const config = {
+        splitChunks: {
+            chunks: "all",
+        },
+    };
+
+    if (devMode) {
+        config.minimizer = [new TerserPlugin(), new OptimizeCssAssetsPlugin()];
+    }
+
+    return config;
+};
 
 module.exports = {
     context: path.resolve(__dirname, "src"),
@@ -22,7 +41,8 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "[name].[contenthash].css",
+            filename: devMode ? "[name].css" : "[name].[contenthash].css",
+            chunkFilename: !devMode ? "[name].css" : "[id].[contenthash].css",
         }),
         new HtmlWebpackPlugin({ template: "./index.html" }),
         new CopyPlugin({
@@ -33,11 +53,13 @@ module.exports = {
                 },
             ],
         }),
+        new MiniCssExtractPlugin(),
     ],
     module: {
         rules: [
             {
                 test: /\.css$/i,
+                test: /\.(sa|sc|c)ss$/,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
             {
@@ -59,9 +81,5 @@ module.exports = {
         compress: true,
         port: 9000,
     },
-    optimization: {
-        splitChunks: {
-            chunks: "all",
-        },
-    },
+    optimization: optimization(),
 };

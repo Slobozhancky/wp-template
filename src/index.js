@@ -26,5 +26,3 @@ const img = new Image();
 img.src = Img;
 
 divLogo.after(img);
-
-console.log(img);
