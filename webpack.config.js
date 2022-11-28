@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     context: path.resolve(__dirname, "src"),
@@ -18,7 +19,17 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         clean: true,
     },
-    plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
+    plugins: [
+        new HtmlWebpackPlugin({ template: "./index.html" }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src/icon.png"),
+                    to: path.resolve(__dirname, "dist"),
+                },
+            ],
+        }),
+    ],
     module: {
         rules: [
             {
