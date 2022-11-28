@@ -35,4 +35,18 @@ module.exports = {
             },
         ],
     },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, "dist"),
+        },
+        watchFiles: ["src/index.html"],
+        hot: true,
+        compress: true,
+        port: 9000,
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
 };

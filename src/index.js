@@ -7,7 +7,7 @@ import Img from "./assets/images/img.jpg";
 const body = document.querySelector("body");
 const btn = document.createElement("button");
 let counterTitle = document.querySelector(".counter_title");
-const divLogo = document.querySelector('.logo');
+const divLogo = document.querySelector(".logo");
 
 let count = 0;
 function getRes() {
