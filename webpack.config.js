@@ -6,10 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
-
-
 module.exports = (env, args) => {
-
     const devMode = args.mode !== "production";
 
     const optimization = () => {
@@ -69,16 +66,18 @@ module.exports = (env, args) => {
                 {
                     test: /\.less$/i,
                     use: [
-                        // compiles Less to CSS
                         MiniCssExtractPlugin.loader,
                         "css-loader",
                         "less-loader",
                     ],
                 },
                 {
-                    test: /\.css$/i,
                     test: /\.(sa|sc|c)ss$/,
-                    use: [MiniCssExtractPlugin.loader, "css-loader"],
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        "css-loader",
+                        "sass-loader",
+                    ],
                 },
                 {
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
