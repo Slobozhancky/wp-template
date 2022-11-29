@@ -1,5 +1,6 @@
 import counter from "./counter";
 import "./styles/style.css";
+import "./styles/less.less";
 
 import data from "./assets/data.json";
 import Img from "./assets/images/img.jpg";
