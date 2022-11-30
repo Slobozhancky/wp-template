@@ -15,7 +15,7 @@ const btn = document.createElement("button");
 let counterTitle = document.querySelector(".counter_title");
 const divLogo = document.querySelector(".logo");
 
-let count = 0;
+let count: number = 0;
 function getRes() {
     count = counter(count);
     counterTitle.innerHTML = count;
@@ -26,9 +26,12 @@ btn.innerHTML = "Click me";
 
 btn.addEventListener("click", () => getRes());
 
-divLogo.after(btn);
+if (divLogo !== null) {
+}
+
+divLogo !== null ? divLogo.after(btn) : console.log(`divLogo === null`);
 
 const img = new Image();
 img.src = Img;
 
-divLogo.after(img);
+divLogo !== null ? divLogo.after(img) : console.log(`divLogo === null`);

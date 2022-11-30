@@ -32,14 +32,15 @@ module.exports = (env, args) => {
     return {
         context: path.resolve(__dirname, "src"),
         mode: "development",
+        entry: {
+            main: "./index.ts",
+            analytics: "./analytics.js",
+        },
         resolve: {
             alias: {
                 images: path.resolve(__dirname, "src/assets/images"),
             },
-        },
-        entry: {
-            main: "./index.js",
-            analytics: "./analytics.js",
+            extensions: [".tsx", ".ts", ".js"],
         },
         output: {
             filename: filename("js"),
@@ -94,6 +95,19 @@ module.exports = (env, args) => {
                         loader: "babel-loader",
                         options: {
                             presets: ["@babel/preset-env"],
+                        },
+                    },
+                },
+                {
+                    test: /\.ts$/,
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "@babel/preset-env",
+                                "@babel/preset-typescript",
+                            ],
                         },
                     },
                 },
