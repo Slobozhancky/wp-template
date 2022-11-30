@@ -1,8 +1,11 @@
 import counter from "./counter";
+import promise from "./babel.js";
 import "./styles/style.css";
 import "./styles/less.less";
 import "./styles/scss.scss";
 import "./styles/sass.sass";
+
+promise.then((res) => console.log(res));
 
 import data from "./assets/data.json";
 import Img from "./assets/images/img.jpg";
