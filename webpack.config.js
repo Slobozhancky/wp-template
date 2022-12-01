@@ -29,18 +29,30 @@ module.exports = (env, args) => {
     const filename = (ext) =>
         devMode ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
+    const bableOptions = (regexp, preset) => {
+        return {
+            test: regexp,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: "babel-loader",
+                options: {
+                    presets: ["@babel/preset-env", preset],
+                },
+            },
+        };
+    };
+
     return {
         context: path.resolve(__dirname, "src"),
         mode: "development",
         entry: {
-            main: "./index.ts",
-            analytics: "./analytics.js",
+            main: "./index.jsx",
         },
         resolve: {
             alias: {
                 images: path.resolve(__dirname, "src/assets/images"),
             },
-            extensions: [".tsx", ".ts", ".js"],
+            extensions: [".tsx", ".ts", ".js", ".jsx"],
         },
         output: {
             filename: filename("js"),
@@ -65,14 +77,6 @@ module.exports = (env, args) => {
         module: {
             rules: [
                 {
-                    test: /\.less$/i,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        "css-loader",
-                        "less-loader",
-                    ],
-                },
-                {
                     test: /\.(sa|sc|c)ss$/,
                     use: [
                         MiniCssExtractPlugin.loader,
@@ -88,29 +92,9 @@ module.exports = (env, args) => {
                     test: /\.(woff|woff2|eot|ttf|otf)$/i,
                     type: "asset/resource",
                 },
-                {
-                    test: /\.m?js$/,
-                    exclude: /(node_modules|bower_components)/,
-                    use: {
-                        loader: "babel-loader",
-                        options: {
-                            presets: ["@babel/preset-env"],
-                        },
-                    },
-                },
-                {
-                    test: /\.ts$/,
-                    exclude: /(node_modules|bower_components)/,
-                    use: {
-                        loader: "babel-loader",
-                        options: {
-                            presets: [
-                                "@babel/preset-env",
-                                "@babel/preset-typescript",
-                            ],
-                        },
-                    },
-                },
+                bableOptions(/\.m?js$/),
+                bableOptions(/\.ts$/, "@babel/preset-typescript"),
+                bableOptions(/\.jsx$/, "@babel/preset-react"),
             ],
         },
         devServer: {
